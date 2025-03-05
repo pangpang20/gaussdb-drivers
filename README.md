@@ -1,13 +1,13 @@
 # 总体计划
 
-|语言|驱动名称|对应PostgreSQL驱动|ORM框架|备注|
-|----|----|----|----|----|
-|JAVA|gaussdb-r2dbc|r2dbc-postgresql|Spring Data R2DBC||
-|GO|gaussdb-go|pgx|GORM||
-|Python|gaussdb-python|psycopg|Dijango ORM||
-|Python|gaussdb-python-async|asyncpg|SqlAlchemy||
-|NodeJS|gaussdb-node|node-postgres|TypeORM||
-|.NET|gaussdb-donet|npgsql|Entity Framework||
+|语言| 驱动名称                                                                                 | 对应PostgreSQL驱动                                                 | ORM框架                                                  |备注|
+|----|--------------------------------------------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------|----|
+|JAVA| [gaussdb-r2dbc](https://github.com/HuaweiCloudDeveloper/gaussdb-r2dbc)                  | [r2dbc-postgresql](https://github.com/pgjdbc/r2dbc-postgresql) | [Spring Data R2DBC](https://github.com/spring-projects/spring-data-relational/)                                  ||
+|GO| [gaussdb-go](https://github.com/HuaweiCloudDeveloper/gaussdb-go)                     | [pgx](https://github.com/jackc/pgx)                            | [GORM](https://github.com/go-gorm/gorm)                ||
+|Python| [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                  | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
+|Python| [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)               | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
+|NodeJS| [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)       | [TypeORM](https://github.com/typeorm/typeorm)          ||
+|.NET| [gaussdb-donet](https://github.com/HuaweiCloudDeveloper/gaussdb-donet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework](https://github.com/dotnet/ef6)      ||
 
 ## 第一阶段目标
 * 驱动可以连接gaussdb，基本功能正常
