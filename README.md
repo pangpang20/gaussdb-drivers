@@ -8,7 +8,7 @@
 |Python| [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)               | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
 |NodeJS| [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)       | [TypeORM](https://github.com/typeorm/typeorm)          ||
 |.NET| [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework](https://github.com/dotnet/ef6)      ||
-|PHP| [pdo_gaussdb](https://github.com/php/php-src/tree/master/ext)               | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql)                     | [Laravel](https://github.com/laravel/laravel)      |贡献PHP官网|
+|PHP| [gaussdb-ph](https://github.com/HuaweiCloudDeveloper/gaussdb-php)               | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql)                     | [Laravel](https://github.com/laravel/laravel)      |代码需要推送PHP官网|
 
 ## 第一阶段目标
 * 驱动可以连接gaussdb，基本功能正常
@@ -43,8 +43,7 @@
 ## GO
 
 1. 下载项目，针对PostgreSQL编译和测试通过
-  * 从 github.com/jackc/pgx fork项目到 github.com/HuaweiCloudDeveloper/gaussdb-go。
-  * 下载 gaussdb-go 项目源码。
+  * 下载 pgx 项目源码。
   * 确保项目能够在本地编译并通过所有PostgreSQL的测试用例。
 
 2. 重构模块路径和包名
