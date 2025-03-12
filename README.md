@@ -7,7 +7,8 @@
 |Python| [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                  | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
 |Python| [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)               | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
 |NodeJS| [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)       | [TypeORM](https://github.com/typeorm/typeorm)          ||
-|.NET| [gaussdb-donet](https://github.com/HuaweiCloudDeveloper/gaussdb-donet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework](https://github.com/dotnet/ef6)      ||
+|.NET| [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework](https://github.com/dotnet/ef6)      ||
+|PHP| [pdo_gaussdb](https://github.com/php/php-src/tree/master/ext)               | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql)                     | [Laravel](https://github.com/laravel/laravel)      |贡献PHP官网|
 
 ## 第一阶段目标
 * 驱动可以连接gaussdb，基本功能正常
@@ -32,11 +33,12 @@
 
 ## JAVA
 
-* 下载项目，针对PostgreSQL编译和测试通过。
+* 下载项目，写一个简单测试程序，针对PostgreSQL编译和测试通过。
+* 修改认证逻辑
+* 测试程序针对GaussDB编译和测试通过
 * 重构group-id, artifactid, 重构package
 * 针对PostgreSQL编译和测试通过
-* 修改认证逻辑
-* 针对GaussDB编译和测试通过
+
 
 ## GO
 
