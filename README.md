@@ -10,8 +10,7 @@
 |Python| [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                  | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
 |Python| [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)               | [SqlAlchemy](https://github.com/sqlalchemy/sqlalchemy) ||
 |NodeJS| [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)       | [TypeORM](https://github.com/typeorm/typeorm)          ||
-|.NET Framework| [gaussdb-dotnetframework](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnetframework)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework](https://github.com/dotnet/ef6)      ||
-|.NET| [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)               | [efcore.pg](https://github.com/npgsql/efcore.pg)                     | [Entity Framework Core](https://github.com/dotnet/efcore)      ||
+|.NET| [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework Core](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet-efcore)      ||
 |PHP| [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)               | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql)                     | [Laravel](https://github.com/laravel/laravel)      |代码需要推送PHP官网|
 
 ## 第一阶段目标
