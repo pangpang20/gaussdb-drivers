@@ -12,6 +12,7 @@
 |NodeJS| [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)       | [TypeORM](https://github.com/typeorm/typeorm)          ||
 |.NET| [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)               | [npgsql](https://github.com/npgsql/npgsql)                     | [Entity Framework Core](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet-efcore)      ||
 |PHP| [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)               | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql)                     | [Laravel](https://github.com/laravel/laravel)      |代码需要推送PHP官网|
+|Rust| [gaussdb-rust](https://github.com/HuaweiCloudDeveloper/gaussdb-rust)               | [rust-postgres](https://github.com/sfackler/rust-postgres/)                     | [Diesel](https://github.com/diesel-rs/diesel)      ||
 
 ## 第一阶段目标
 * 驱动可以连接gaussdb，基本功能正常
