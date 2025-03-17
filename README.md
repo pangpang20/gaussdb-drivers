@@ -31,20 +31,28 @@
 
 ## JAVA
 
-* 驱动名称: gaussdb-r2dbc
-* group-id: com.huaweicloud.gaussdb
-* artifactid: gaussdb-r2dbc
-* package: com.huaweicloud.gaussdb
+* 项目信息：
+  * 项目名称（仓库名称）：gaussdb-r2dbc
+  * 驱动名称(文档、传播): gaussdb-r2dbc
+
+* Maven发布：
+  * group-id: com.huaweicloud.gaussdb
+  * artifactid: gaussdb-r2dbc
+
+* 应用开发：
+  * package: com.huaweicloud.gaussdb
+  * 连接串：`r2dbc:gaussdb://<host>:<port>/<database>`
+  * 驱动名称: `gaussdb`（ConnectionFactoryOptions）
 
 ## GO
 
-* 驱动名称: gaussdb-go
+* 项目名称: gaussdb-go
 * 模块路径: github.com/HuaweiCloudDeveloper/gaussdb-go
 * 包名: gaussdb
 
 ## NODEJS
 
-* 驱动名称: gaussdb-node
+* 项目名称: gaussdb-node
 * 模块路径: github.com/HuaweiCloudDeveloper/gaussdb-node
 * 包名: gaussdb
 
