@@ -24,7 +24,7 @@
 
 1. 制定项目的规范，包括项目名称、命名空间、代码结构、目录规范、发布规范等。
 2. 确保项目合规修改。审核代码Licence信息，确保代码修改过程符合License的要求，确保不涉及抄袭。
-3. 修改代码的认证逻辑，能够连接GaussDB。第一阶段任务需要确保SHA256认证方式功能正常，其他认证方式可选。
+3. 修改代码的认证逻辑，能够连接GaussDB。第一阶段任务需要确保SHA256（10）和MD5_SHA256(11)认证方式功能正常，其他认证方式可选。
 4. 根据规范，完成代码重构，重构后的代码满足项目规范。
 5. 项目代码所有单元测试用例通过，集成测试用例通过，并发布一个版本，书写版本发布说明，版本说明详细介绍本版本所做的修改内容。
 6. 参考PostgreSQL的README给出GaussDB的README，内容包括项目功能介绍、快速使用入门、如何进行代码贡献等。
@@ -35,8 +35,7 @@
 
 * 项目信息：
 
-  * 项目名称（仓库名称）：gaussdb-r2dbc
-  * 驱动名称(文档、传播): gaussdb-r2dbc
+  * 仓库名称：gaussdb-r2dbc
 * Maven发布：
 
   * group-id: com.huaweicloud.gaussdb
@@ -61,15 +60,14 @@
 
 ## .NET
 
-- 项目信息
-  - 项目名称（仓库名称）：HuaweiCloud.GaussDB
-  - 驱动名称（文档、传播）：GaussDB
-- Nuget发布
-  - 包名：HuaweiCloud.Drivers.GaussDB
-- 应用开发
-  - namespace：HuaweiCloud.GaussDB
-  - 连接串：`dbc:gaussdb://<host>:<port>/<database>`
-  - 驱动名称：GaussDB
+* 项目信息
+  * 仓库名称：gaussdb-dotnet
+* Nuget发布
+  * 包名：HuaweiCloud.Drivers.GaussDB
+* 应用开发
+  * namespace：HuaweiCloud.GaussDB
+  * 连接串：`dbc:gaussdb://<host>:<port>/<database>`
+  * 驱动名称：GaussDB
 
 # 详细开发任务
 
