@@ -72,3 +72,14 @@
 # 详细开发任务
 
 详细开发任务在issues里面提交： https://github.com/HuaweiCloudDeveloper/gassdb-drivers/issues
+
+# 注意实现
+
+* 需要同时使用GaussDB和OpenGauss进行测试。建议通过Docker镜像（enmotech/opengauss-lite）安装OpenGauss。
+
+# 开源开发规范要求
+* 按照主仓库代码模板设置IDE，确保提交的代码格式符合主仓库要求。
+* 采用Fork - PR开发流程，通过PR给主仓库提交修改。
+* 鼓励将功能拆解为独立的小特性，每个commit只包含一个小特性，并且代码修改规模控制在200行以内。
+* PR需要通过主仓库配置的各项代码检查（自动化测试、代码静态检查等），积极配合修复代码检查发现的问题。
+* 积极配合修复代码检视意见，针对检视意见都有回应和闭环。
