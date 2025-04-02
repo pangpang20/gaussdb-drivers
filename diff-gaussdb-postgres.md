@@ -73,7 +73,57 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 * 补充说明
 
 参考链接：
-    * https://bbs.huaweicloud.com/forum/thread-0211178353127283084-1-1.html
+* https://bbs.huaweicloud.com/forum/thread-0211178353127283084-1-1.html
+
+### 不支持 CREATE/ALTER/DROP DOMAIN
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0210178360425351069-1-1.html
+
+### 不支持 MultiRange
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0211178940977329145-1-1.html
+
+### 不支持 LargeObject
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0211178941356334146-1-1.html
+
+### 不支持 Serializable
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0213178941810463121-1-1.html
+* https://support.huaweicloud.com/intl/zh-cn/centralized-devg-v2-gaussdb/gaussdb_42_0501.html
+
+### 不支持 临时表Serial
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0213178941810463121-1-1.html
+
+### 不支持 LISTEN statement
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0210178943513179110-1-1.html
+
+### 不支持 NOFITY statement
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0234178943691111112-1-1.html
 
 ## GaussDB已知缺陷
 
