@@ -127,13 +127,6 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 
 ## GaussDB已知缺陷
 
-### FETCH FIRST n ROWS提示语法错误
-
-* 补充说明
-
-参考链接：
-    * https://bbs.huaweicloud.com/forum/thread-02104174364146264084-1-1.html
-
 ### SET LOCK_TIMEOUT提示错误
 
 * 补充说明
@@ -141,3 +134,19 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-02127178278029106066-1-1.html
 
+
+## JDBC(gaussjdbc.jar)已知缺陷
+
+### FETCH FIRST n ROWS提示语法错误
+
+* 补充说明
+
+参考链接：
+    * https://bbs.huaweicloud.com/forum/thread-02104174364146264084-1-1.html
+
+### 创建Date类型字段的表，实际类型为timestamp(0)
+
+* 补充说明
+
+参考链接：
+    * https://bbs.huaweicloud.com/forum/thread-0234179025026914116-1-1.html
