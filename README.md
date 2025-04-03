@@ -48,9 +48,15 @@
 
 ## GO
 
-* 项目名称: gaussdb-go
-* 模块路径: github.com/HuaweiCloudDeveloper/gaussdb-go
-* 包名: gaussdb
+* 项目信息
+  * 仓库名称: gaussdb-go
+* pkg.go.dev发布
+  * package name: github.com/HuaweiCloudDeveloper/gaussdb-go
+* 应用开发
+  * package：github.com/HuaweiCloudDeveloper/gaussdb-go
+  * 连接串：`gaussdb://<username>:<password>@<host>:<port>/<database>`
+  * 驱动名称：`gaussdb`
+
 
 ## NODEJS
 
