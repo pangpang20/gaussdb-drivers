@@ -134,6 +134,12 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-02127178278029106066-1-1.html
 
+### 启动statement cache并且表结构发生变化时，数据库返回错误码不正确
+
+参考链接：
+    * https://bbs.huaweicloud.com/forum/thread-02127179062938863125-1-1.html
+
+应用程序在这个场景会捕获到数据库异常，最佳的状态是能够自动恢复。客户端驱动如果要做到自动恢复，需要数据库针对这个异常返回不一样的错误码。
 
 ## JDBC(gaussjdbc.jar)已知缺陷
 
