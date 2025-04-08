@@ -66,6 +66,13 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-0274178187455582064-1-1.html
 
+### GaussDB不支持JSON和JSONB类型的隐式转换
+
+* 补充说明
+
+参考链接：
+    * https://bbs.huaweicloud.com/forum/thread-0211179461468355165-1-1.html
+
 ## GaussDB不存在的功能
 
 ### 不支持refcursor关键字
@@ -111,19 +118,17 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0213178941810463121-1-1.html
 
-### 不支持 LISTEN statement
+### 不支持 LISTEN/NOFITY statement
 
 * 补充说明
 
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0210178943513179110-1-1.html
-
-### 不支持 NOFITY statement
-
-* 补充说明
-
-参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0234178943691111112-1-1.html
+
+### 不支持 line 类型
+
+line类型是PostgreSQL新增加的用于描述平面直线的数据类型，GaussDB不存在对应的类型。 
 
 ## GaussDB已知缺陷
 
