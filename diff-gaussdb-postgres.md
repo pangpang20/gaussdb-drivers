@@ -130,6 +130,57 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 
 line类型是PostgreSQL新增加的用于描述平面直线的数据类型，GaussDB不存在对应的类型。 
 
+### 不支持ltree的extenstion
+会报类似错误: `ERROR:  Failed to open the extension control file: No such file or directory.`
+
+PosgreSQL:
+```sql
+postgres=# create extension ltree;
+CREATE EXTENSION
+postgres=#
+```
+### 不支持SUPERUSER关键字
+需要使用`SYSADMIN`代替.
+
+PosgreSQL:
+```sql
+postgres=# create user pgx_pw with SUPERUSER PASSWORD 'Gaussdb@123!';
+CREATE ROLE
+postgres=#
+```
+
+### 不支持password_encryption关键字
+需要使用`password_encryption_type`代替.
+
+PosgreSQL:
+```sql
+postgres=# set password_encryption = md5;
+SET
+postgres=#
+```
+
+### 不支持unix_socket_directories关键字
+需要使用`unix_socket_directory`代替.
+
+PosgreSQL:
+```sql
+postgres=# show unix_socket_directories;
+ unix_socket_directories
+-------------------------
+ /var/run/postgresql
+(1 row)
+```
+
+### 用户名不支持某些特殊字符
+会报类似的错误: `ERROR:  Invalid name:  tricky, ' } " \\ test user .`
+
+PosgreSQL:
+```sql
+postgres=# create user " tricky, ' } "" \\ test user " SUPERUSER password 'secret';
+CREATE ROLE
+postgres=#
+```
+
 ## GaussDB已知缺陷
 
 ### SET LOCK_TIMEOUT提示错误
@@ -145,6 +196,18 @@ line类型是PostgreSQL新增加的用于描述平面直线的数据类型，Gau
     * https://bbs.huaweicloud.com/forum/thread-02127179062938863125-1-1.html
 
 应用程序在这个场景会捕获到数据库异常，最佳的状态是能够自动恢复。客户端驱动如果要做到自动恢复，需要数据库针对这个异常返回不一样的错误码。
+
+### 除法会返回小数
+执行`select 4/3;`会返回: `1.33333333333333326`
+
+PosgreSQL:
+```sql
+postgres=# select 4/3;
+ ?column?
+----------
+        1
+(1 row)
+```
 
 ## JDBC(gaussjdbc.jar)已知缺陷
 
