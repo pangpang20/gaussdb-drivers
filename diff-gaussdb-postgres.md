@@ -73,6 +73,235 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-0211179461468355165-1-1.html
 
+### 不支持操作与系统表名或者视图名一致的表
+* GaussDB写法
+```
+insert into PLAN_TABLE (name,id) values (?,?)
+```
+* PosgreSQL写法
+```
+insert into PLAN_TABLE (name,id) values (?,?)
+```
+
+### array_position(e.theArray, 'xyz') = 0函数表现不一致
+* GaussDB写法
+```
+select
+        ewa1_0.id,
+        ewa1_0.the_array,
+        ewa1_0.the_label,
+        ewa1_0.the_labels 
+    from
+        EntityWithArrays ewa1_0 
+    where
+        (
+            array_positions(ewa1_0.the_array, 'xyz')
+        )[1]=0
+```
+* PosgreSQL写法
+```
+select
+        ewa1_0.id,
+        ewa1_0.the_array,
+        ewa1_0.the_label,
+        ewa1_0.the_labels 
+    from
+        EntityWithArrays ewa1_0 
+    where
+        case 
+            when ewa1_0.the_array is not null 
+                then coalesce(array_position(ewa1_0.the_array, 'xyz'), 0) 
+        end=0
+```
+
+### array_trim(e.theArray, 1)函数表现不一致
+* GaussDB写法
+```
+select
+        array_trim(ewa1_0.the_array, 1) 
+    from
+        EntityWithArrays ewa1_0 
+    where
+        ewa1_0.id=1
+```
+* PosgreSQL写法
+```
+select
+        trim_array(ewa1_0.the_array, 1) 
+    from
+        EntityWithArrays ewa1_0 
+    where
+        ewa1_0.id=1
+```
+
+### json_query(e.json, '$.theNestedObjects[*].id' with wrapper)函数表现不一致
+* GaussDB写法
+```
+select
+        json_build_array(jh1_0.json::json #> '{theNestedObjects,*,id}') 
+    from
+        JsonHolder jh1_0 
+    where
+        jh1_0.id=1
+```
+* PosgreSQL写法
+```
+select
+        json_query(jh1_0.json, '$.theNestedObjects[*].id' with wrapper) 
+    from
+        JsonHolder jh1_0 
+    where
+        jh1_0.id=1
+```
+
+### json_objectagg(e.theString value e.theUuid)函数表现不一致
+* GaussDB写法
+```
+select
+        json_object_agg(CASE 
+            WHEN eob1_0.the_string IS NOT NULL   
+                THEN eob1_0.the_string 
+        END, eob1_0.theuuid) 
+    from
+        EntityOfBasics eob1_0
+```
+* PosgreSQL写法
+```
+select
+        json_objectagg(eob1_0.the_string:eob1_0.theuuid absent 
+            on null 
+    returning jsonb) from
+        EntityOfBasics eob1_0
+```
+
+### json_objectagg(e.theString value e.theUuid)函数表现不一致
+* GaussDB写法
+```
+select
+        json_object_agg(CASE 
+            WHEN cast(eob1_0.the_integer as varchar) IS NOT NULL   
+                THEN cast(eob1_0.the_integer as varchar) 
+        END, eob1_0.the_string) 
+    from
+        EntityOfBasics eob1_0
+```
+* PosgreSQL写法
+```
+select
+        json_objectagg(cast(eob1_0.the_integer as varchar):eob1_0.the_string absent 
+            on null with unique keys 
+    returning jsonb) from
+        EntityOfBasics eob1_0
+```
+
+### json_objectagg(e.theString value e.theUuid)函数表现不一致
+* GaussDB写法
+```
+select
+        json_merge('{"a":456, "b":[1,2], "c":{"a":1}}', '{"a":null, "b":[4,5], "c":{"b":1}}')
+```
+* PosgreSQL写法
+```
+select
+        (with recursive args(d0, d1) as(select
+            cast('{"a":456, "b":[1,2], "c":{"a":1}}' as jsonb), cast('{"a":null, "b":[4,5], "c":{"b":1}}' as jsonb)),
+        val0(p, k, v) as (select
+            '{}'::text[], s.k, t.d0->s.k 
+        from
+            args t 
+        join
+            lateral jsonb_object_keys(t.d0) s(k) 
+                on 1=1 
+        union
+        select
+            v.p||v.k, s.k, v.v->s.k 
+        from
+            val0 v 
+        join
+            lateral jsonb_object_keys(v.v) s(k) 
+                on jsonb_typeof(v.v)='object'), val1(p, k, v) as (select
+            '{}'::text[], s.k, t.d1->s.k 
+    from
+        args t 
+    join
+        lateral jsonb_object_keys(t.d1) s(k) 
+            on 1=1 
+    union
+    select
+        v.p||v.k, s.k, v.v->s.k 
+    from
+        val1 v 
+    join
+        lateral jsonb_object_keys(v.v) s(k) 
+            on jsonb_typeof(v.v)='object'), res(v, p, l) as(select
+        jsonb_object_agg(coalesce(v1.k, v0.k), coalesce(v1.v, v0.v)), coalesce(v1.p, v0.p), cardinality(coalesce(v1.p, v0.p)) 
+from
+    val0 v0 
+full join
+    val1 v1 
+        on v0.p=v1.p 
+        and v0.k=v1.k 
+where
+    cardinality(coalesce(v1.p, v0.p))=(select
+        cardinality(v.p) 
+    from
+        val0 v 
+    union
+    select
+        cardinality(v.p) 
+    from
+        val1 v 
+    order by
+        1 desc 
+    limit
+        1) 
+    and jsonb_typeof(coalesce(v1.v)) is distinct 
+from
+    'null' 
+group by
+    coalesce(v1.p, v0.p), cardinality(coalesce(v1.p, v0.p)) 
+union
+all select
+    jsonb_object_agg(coalesce(v1.k, v0.k), coalesce(case 
+        when coalesce(v1.k, v0.k)=r.p[cardinality(r.p)] 
+            then r.v 
+    end, v1.v, v0.v)) filter (
+where
+    coalesce(case 
+        when coalesce(v1.k, v0.k)=r.p[cardinality(r.p)] 
+            then r.v 
+    end, v1.v, v0.v) is not null), coalesce(v1.p, v0.p), r.l-1 
+from
+    val0 v0 
+full join
+    val1 v1 
+        on v0.p=v1.p 
+        and v0.k=v1.k 
+join
+    (select
+        * 
+    from
+        res r 
+    order by
+        r.l 
+    fetch
+        first 1 rows with ties) r 
+        on cardinality(coalesce(v1.p, v0.p))=r.l-1 
+        and jsonb_typeof(coalesce(v1.v)) is distinct 
+from
+    'null' 
+    and r.l<>0 
+group by
+    coalesce(v1.p, v0.p), r.l-1) select
+    r.v 
+from
+    res r 
+where
+    r.l=0
+)
+```
+
+
 ## GaussDB不存在的功能
 
 ### 不支持refcursor关键字
@@ -181,6 +410,167 @@ CREATE ROLE
 postgres=#
 ```
 
+### unnest语法不支持
+* GaussDB写法
+```
+select
+        b1_0.id,
+        p1_0.name,
+        l1_0.name,
+        l1_0.val 
+    from
+        Book b1_0 
+    join
+        unnest(b1_0.publishers) p1_0 
+            on true 
+    join
+        unnest(b1_0.labels) l1_0 
+            on true 
+    order by
+        b1_0.id,
+        p1_0.name asc nulls first,
+        l1_0.name asc nulls first,
+        l1_0.val asc nulls first
+```
+* PosgreSQL写法
+```
+select
+        b1_0.id,
+        p1_0.name,
+        l1_0.name,
+        l1_0.val 
+    from
+        Book b1_0 
+    join
+        lateral unnest(b1_0.publishers) p1_0 
+            on true 
+    join
+        lateral unnest(b1_0.labels) l1_0 
+            on true 
+    order by
+        b1_0.id,
+        p1_0.name asc nulls first,
+        l1_0.name asc nulls first,
+        l1_0.val asc nulls first
+```
+
+### json_table不支持
+* GaussDB写法
+```
+select
+        t1_0.theInt,
+        t1_0.theFloat,
+        t1_0.theString,
+        t1_0.theBoolean,
+        t1_0.theNull,
+        t1_0.theObject,
+        t1_0.theNestedInt,
+        t1_0.theNestedFloat,
+        t1_0.theNestedString,
+        t1_0.arrayIndex,
+        t1_0.arrayValue,
+        t1_0.nonExisting 
+    from
+        EntityWithJson ewj1_0 
+    join
+        json_table(ewj1_0.json, '$' columns(theInt integer path '$.theInt', theFloat float path '$.theFloat', theString text path '$.theString', theBoolean boolean path '$.theBoolean', theNull text path '$.theNull', theObject jsonb path '$.theObject', theNestedInt integer path '$.theObject.theInt', theNestedFloat float path '$.theObject.theFloat', theNestedString text path '$.theObject.theString', nested '$.theArray[*]' columns(arrayIndex for ordinality, arrayValue text path '$'), nonExisting boolean exists path '$.nonExisting')) t1_0 
+            on true 
+    order by
+        ewj1_0.id,
+        t1_0.arrayIndex
+```
+* PosgreSQL写法
+```
+select
+        t1_0.theInt,
+        t1_0.theFloat,
+        t1_0.theString,
+        t1_0.theBoolean,
+        t1_0.theNull,
+        t1_0.theObject,
+        t1_0.theNestedInt,
+        t1_0.theNestedFloat,
+        t1_0.theNestedString,
+        t1_0.arrayIndex,
+        t1_0.arrayValue,
+        t1_0.nonExisting 
+    from
+        EntityWithJson ewj1_0 
+    join
+        lateral json_table(ewj1_0.json, '$' columns(theInt integer path '$.theInt', theFloat float path '$.theFloat', theString text path '$.theString', theBoolean boolean path '$.theBoolean', theNull text path '$.theNull', theObject jsonb path '$.theObject', theNestedInt integer path '$.theObject.theInt', theNestedFloat float path '$.theObject.theFloat', theNestedString text path '$.theObject.theString', nested '$.theArray[*]' columns(arrayIndex for ordinality, arrayValue text path '$'), nonExisting boolean exists path '$.nonExisting')) t1_0 
+            on true 
+    order by
+        ewj1_0.id,
+        t1_0.arrayIndex
+```
+
+### index无法内聚为一个函数
+* hibernate
+```
+select index(e), e from generate_series(2, 3, 1) e order by index(e)
+* 
+```
+* PosgreSQL写法
+```
+select
+        e1_0.ordinality,
+        e1_0.e1_0 
+    from
+        generate_series(2, 3, 1) with ordinality e1_0 
+    order by
+        e1_0.ordinality
+```
+
+### 内存溢出
+* GaussDB写法 
+```
+select (current_date-cast(? as date))*86400*1e9
+```
+* PosgreSQL写法
+```
+select (current_date-cast(? as date))*86400*1e9
+```
+* 补充说明 
+```
+产品特性，不容兼容模式有不同的行为。默认的兼容模式是内存溢出
+ ```
+
+### 对json的某字段的更新和查询不支持
+* GaussDB写法 
+```
+update JsonHolder jh1_0 set aggregate=coalesce(jh1_0.aggregate,'{}')||jsonb_build_object('theString',to_jsonb(cast(null as varchar)))
+```
+* PosgreSQL写法
+```
+update
+        JsonHolder jh1_0 
+    set
+        aggregate=coalesce(jh1_0.aggregate, '{}')||jsonb_build_object('theString',
+        to_jsonb(cast(null as varchar)))
+```
+
+### 对sinh，log，log10等函数不支持
+* GaussDB写法 
+```
+select log10(eob1_0.the_int),log(?,eob1_0.the_int) from EntityOfBasics eob1_0 where eob1_0.id=?, Error Msg = Unsupported function.
+```
+* PosgreSQL写法
+```
+select log10(eob1_0.the_int),log(?,eob1_0.the_int) from EntityOfBasics eob1_0 where eob1_0.id=?, Error Msg = Unsupported function.
+```
+
+### 不支持insert on conflinct语法
+* GaussDB写法 
+```
+insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothing
+```
+* PosgreSQL写法
+```
+insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothing
+```
+
+
+
 ## GaussDB已知缺陷
 
 ### SET LOCK_TIMEOUT提示错误
@@ -224,3 +614,10 @@ postgres=# select 4/3;
 
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-0234179025026914116-1-1.html
+
+### 获取byte二位数组失败
+```
+final byte[][] byteArray = session.find( EntityWithDoubleByteArray.class, id ).getByteArray();
+
+java.sql.SQLFeatureNotSupportedException: Method com.huawei.gaussdb.jdbc.jdbc.PgArray.getArrayImpl(long,int,Map) is not yet implemented.
+```
