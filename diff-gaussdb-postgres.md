@@ -521,7 +521,7 @@ select
         e1_0.ordinality
 ```
 
-### 内存溢出
+### 日期操作内存溢出
 * GaussDB写法 
 ```
 select (current_date-cast(? as date))*86400*1e9
@@ -535,7 +535,7 @@ select (current_date-cast(? as date))*86400*1e9
 产品特性，不容兼容模式有不同的行为。默认的兼容模式是内存溢出
  ```
 
-### 对json的某字段的更新和查询不支持
+### 对结构性字段如json的某字段的更新和查询不支持
 * GaussDB写法 
 ```
 update JsonHolder jh1_0 set aggregate=coalesce(jh1_0.aggregate,'{}')||jsonb_build_object('theString',to_jsonb(cast(null as varchar)))
