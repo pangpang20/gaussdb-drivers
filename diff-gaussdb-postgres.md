@@ -368,6 +368,9 @@ postgres=# create extension ltree;
 CREATE EXTENSION
 postgres=#
 ```
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0211180003903912003-1-1.html
+
 ### 不支持SUPERUSER关键字
 需要使用`SYSADMIN`代替.
 
@@ -378,8 +381,11 @@ CREATE ROLE
 postgres=#
 ```
 
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0238179049931706106-1-1.html
+
 ### 不支持password_encryption关键字
-需要使用`password_encryption_type`代替.
+需要使用`password_encryption_type`代替, 也不能动态设置.
 
 PosgreSQL:
 ```sql
@@ -387,6 +393,9 @@ postgres=# set password_encryption = md5;
 SET
 postgres=#
 ```
+参考链接：
+* https://doc.hcs.huawei.com/db/zh-cn/gaussdb/24.1.30/devg-dist/gaussdb-12-1691.html
+* https://bbs.huaweicloud.com/forum/thread-0207180004302613002-1-1.html
 
 ### 不支持unix_socket_directories关键字
 需要使用`unix_socket_directory`代替.
@@ -399,6 +408,8 @@ postgres=# show unix_socket_directories;
  /var/run/postgresql
 (1 row)
 ```
+参考链接：
+* https://doc.hcs.huawei.com/db/zh-cn/gaussdb/24.1.30/devg-dist/gaussdb-12-1690.html
 
 ### 用户名不支持某些特殊字符
 会报类似的错误: `ERROR:  Invalid name:  tricky, ' } " \\ test user .`
@@ -409,6 +420,8 @@ postgres=# create user " tricky, ' } "" \\ test user " SUPERUSER password 'secre
 CREATE ROLE
 postgres=#
 ```
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0228180004564653006-1-1.html
 
 ### unnest语法不支持
 * GaussDB写法
@@ -568,8 +581,127 @@ insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothi
 ```
 insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothing
 ```
+### 不支持在临时表上创建trigger
+会报类似的错误: `ERROR:  Only support CREATE TRIGGER on regular row table.`
 
+PosgreSQL:
+```sql
+postgres=# create temporary table sentences(
+        t text,
+        ts tsvector
+);
+CREATE TABLE
+postgres=# create function pg_temp.sentences_trigger() returns trigger as $$
+        begin
+          new.ts := to_tsvector(new.t);
+                return new;
+        end
+        $$ language plpgsql;
+CREATE FUNCTION
+postgres=# create trigger sentences_update before insert on sentences for each row execute procedure pg_temp.sentences_trigger();
+CREATE TRIGGER
+postgres=#
+```
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0228180004564653006-1-1.html
 
+### 连接成功后,TCP包里返回的PID字段并不是当前连接的PID
+wireshark抓包`Backend key data`的时候PostgerSQL会返回当前连接的PID, GaussDB也返回了这个字段,但是并不是当前连接的PID
+
+参考链接:
+* https://bbs.huaweicloud.com/forum/thread-0259179656679211013-1-1.html
+
+### 不支持空字符转为xml的数据类型
+会报类似的错误: `ERROR: invalid XML content (SQLSTATE 2200N)`
+
+PosgreSQL:
+```sql
+postgres=# select ''::xml;
+ xml
+-----
+
+(1 row)
+```
+参考链接:
+* https://bbs.huaweicloud.com/forum/thread-0204180007865671004-1-1.html
+
+### drop function的时候需要指定parameter
+需要在函数名后面加上`(parameter)`
+会报类似的错误: `ERROR:  syntax error at or near "cascade"`
+
+PosgreSQL:
+```sql
+postgres=# create function test_trigger() returns trigger language plpgsql as $$
+        begin
+        if new.n = 4 then
+                raise exception 'n cant be 4!';
+        end if;
+        return new;
+end$$;
+CREATE FUNCTION
+postgres=# drop function if exists test_trigger cascade;
+DROP FUNCTION
+postgres=#
+```
+参考链接:
+* https://doc.hcs.huawei.com/db/en-us/gaussdb/24.7.30.10/devg-dist/gaussdb-12-0595.html
+* https://bbs.huaweicloud.com/forum/topicpost/1350
+
+### 约束触发器的时候要使用`procedure`
+PostgreSQL使用`function`关键字
+
+PosgreSQL:
+```sql
+postgres=# create temporary table defer_test (
+                        id text primary key,
+                        n int not null, unique (n),
+                        unique (n) deferrable initially deferred );
+CREATE TABLE
+postgres=# create function test_trigger() returns trigger language plpgsql as $$
+        begin
+        if new.n = 4 then
+                raise exception 'n cant be 4!';
+        end if;
+        return new;
+end$$;
+CREATE FUNCTION
+postgres=# create constraint trigger test
+                        after insert or update on defer_test
+                        deferrable initially deferred
+                        for each row
+                        execute function test_trigger();
+CREATE TRIGGER
+```
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0233180008573088003-1-1.html
+
+### 密码错误时返回的`Severity`是`ERROR`
+用wireshark抓包时，发现返回的`Severity`是`ERROR`，而PosgreSQL返回的是`FATAL`。
+
+参考链接
+* https://bbs.huaweicloud.com/forum/thread-0207180008754310003-1-1.html
+
+### 没有`pg_stat_ssl`这个视图
+类似的视图也未找到
+
+PosgreSQL:
+```sql
+postgres=# select ssl from pg_stat_ssl;
+ ssl
+-----
+ f
+ f
+ f
+(3 rows)
+```
+* 参考链接
+  https://bbs.huaweicloud.com/forum/thread-0202180008880802008-1-1.html
+
+### notice的返回里没有`V`这个field
+通过wireshark抓包, 发现返回的`notice`里没有`V`这个field. 这个`V`的field在PostgreSQL里的作用是其value不会被localize
+
+* 参考链接
+  https://bbs.huaweicloud.com/forum/thread-0233180009314921004-1-1.html
 
 ## GaussDB已知缺陷
 
@@ -598,6 +730,8 @@ postgres=# select 4/3;
         1
 (1 row)
 ```
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0233180004755556002-1-1.html
 
 ## JDBC(gaussjdbc.jar)已知缺陷
 
