@@ -52,6 +52,16 @@ CREATE SUBSCRIPTION mysub CONNECTION 'host=XX.XX.XX.XXX port=8000 user= user_nam
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-0211178860880205142-1-1.html
 
+### JDBC使用逻辑复制功能
+
+* 补充说明
+PostgreSQL使用逻辑复制连接的端口与普通SQL端口一致，默认是5432, PostgreSQL需要单独配置逻辑复制权限和逻辑复制槽。
+
+GaussDB使用的逻辑复制端口与普通SQL端口不同，通常为普通端口+1。 比如集中式版本为8001，分布式版本为CN（协调节点）和DN（数据节点）的端口+1. 
+
+参考链接：
+  * https://bbs.huaweicloud.com/forum/thread-0228180067001483008-1-1.html
+
 ### gaussdbjdbc.jar的executeBatch返回值不符合JDBC规范
 
 * 补充说明
