@@ -704,14 +704,50 @@ postgres=# select ssl from pg_stat_ssl;
  f
 (3 rows)
 ```
-* 参考链接
-  https://bbs.huaweicloud.com/forum/thread-0202180008880802008-1-1.html
+参考链接
+* https://bbs.huaweicloud.com/forum/thread-0202180008880802008-1-1.html
 
 ### notice的返回里没有`V`这个field
 通过wireshark抓包, 发现返回的`notice`里没有`V`这个field. 这个`V`的field在PostgreSQL里的作用是其value不会被localize
 
-* 参考链接
-  https://bbs.huaweicloud.com/forum/thread-0233180009314921004-1-1.html
+参考链接
+* https://bbs.huaweicloud.com/forum/thread-0233180009314921004-1-1.html
+
+### 一些错误返回信息的首字母是大写
+不太清楚是所有的错误都是大写的, 还是只有一部分的错误是
+
+比如: 
+- 查询不存在的字段
+    - PostgreSQL: `ERROR: relation "baz" does not exist on gaussdb (SQLSTATE 42P01)`
+    - GaussDB: `ERROR: Relation "baz" does not exist on gaussdb (SQLSTATE 42P01)`
+- 类型转换为不存在的类型: `select 'a'::badtype;`
+    - PostgreSQL: `type "badtype" does not exist`
+    - GaussDB: `Type "badtype" does not exist`
+
+参考链接
+*  https://bbs.huaweicloud.com/forum/thread-0202180086482842011-1-1.html
+
+### 字符串转为float4/float8的时候, 跟原值不一样
+PostgreSQL是与原值一致的, GaussDB会在不同的目标类型返回不同的值
+
+PostgreSQL:
+```sql
+-- GaussDB返回1.23000002
+postgres=# select '1.23'::float4;
+ float4
+--------
+   1.23
+(1 row)
+
+-- GaussDB返回1.22999999999999998
+postgres=# select '1.23'::float8;
+ float8
+--------
+   1.23
+(1 row)
+```
+参考链接
+*  https://bbs.huaweicloud.com/forum/thread-0204180071486749008-1-1.html?ticket=ST-8325461-ATYwrfoNhvN7d0UckaH6YC29-sso
 
 ## GaussDB已知缺陷
 
