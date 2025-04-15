@@ -311,6 +311,18 @@ where
 )
 ```
 
+### GaussDB NUMERIC 类型精度没PostgreSQL高
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0211180070242768009-1-1.html
+
+### GaussDB数值类型（numeric）不支持Infinity（正无穷）和-Infinity（负无穷）
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0202180070831076010-1-1.html
+
 
 ## GaussDB不存在的功能
 
@@ -748,6 +760,13 @@ postgres=# select '1.23'::float8;
 ```
 参考链接
 *  https://bbs.huaweicloud.com/forum/thread-0204180071486749008-1-1.html?ticket=ST-8325461-ATYwrfoNhvN7d0UckaH6YC29-sso
+
+### 不支持 macaddr8类型
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0211180066801704005-1-1.html
 
 ## GaussDB已知缺陷
 
