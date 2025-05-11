@@ -793,6 +793,14 @@ postgres=# select '1.23'::float8;
 
 
 
+### pg_attribute 中没有 attidentity字段
+
+- 补充说明
+
+  在.NET Npgsql.Schema GenerateColumnsQuery中会查询pg_attribute的attidentity，导致大量相关测试用例失败。
+
+
+
 ## GaussDB已知缺陷
 
 ### SET LOCK_TIMEOUT提示错误
