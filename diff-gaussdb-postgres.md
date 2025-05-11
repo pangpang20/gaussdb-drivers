@@ -568,7 +568,7 @@ select (current_date-cast(? as date))*86400*1e9
 * 补充说明 
 ```
 产品特性，不容兼容模式有不同的行为。默认的兼容模式是内存溢出
- ```
+```
 
 ### 对结构性字段如json的某字段的更新和查询不支持
 * GaussDB写法 
@@ -767,6 +767,18 @@ postgres=# select '1.23'::float8;
 
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0211180066801704005-1-1.html
+
+
+
+### 不支持**Discard**关键字
+
+- Discard非保留关键字，且在GaussDB中执行后出现异常 "DISCARD statement is not yet supported."
+
+参考连接：
+
+https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
+
+
 
 ## GaussDB已知缺陷
 
