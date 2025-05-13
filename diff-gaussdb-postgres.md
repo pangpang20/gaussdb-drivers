@@ -433,7 +433,30 @@ postgres=# show unix_socket_directories;
 参考链接：
 * https://doc.hcs.huawei.com/db/zh-cn/gaussdb/24.1.30/devg-dist/gaussdb-12-1690.html
 
+
+
+### 不支持**DISCARD**关键字
+
+- Discard非保留关键字，且在GaussDB中执行后出现异常 "DISCARD statement is not yet supported."
+
+参考连接：
+
+https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
+
+
+
+### 不支持**UNLISTEN**关键字
+
+- UNLISTEN非保留关键字，且在GaussDB中执行后出现异常 "UNLISTENstatement is not yet supported."
+
+参考连接：
+
+https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
+
+
+
 ### 用户名不支持某些特殊字符
+
 会报类似的错误: `ERROR:  Invalid name:  tricky, ' } " \\ test user .`
 
 PosgreSQL:
@@ -770,13 +793,11 @@ postgres=# select '1.23'::float8;
 
 
 
-### 不支持**Discard**关键字
+### pg_attribute 中没有 attidentity字段
 
-- Discard非保留关键字，且在GaussDB中执行后出现异常 "DISCARD statement is not yet supported."
+- 补充说明
 
-参考连接：
-
-https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
+  在.NET Npgsql.Schema GenerateColumnsQuery中会查询pg_attribute的attidentity，导致大量相关测试用例失败。
 
 
 
