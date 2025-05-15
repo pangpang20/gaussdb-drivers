@@ -49,11 +49,11 @@
 
 * 项目信息
   * 仓库名称：gaussdb-dotnet
-* Nuget发布
+* NuGet发布
   * 包名：HuaweiCloud.Drivers.GaussDB
 * 应用开发
   * namespace：HuaweiCloud.GaussDB
-  * 连接串：`gaussdb://<username>:<password>@<host>:<port>/<database>`/`Host=<host>;Username=<user>;Password=<pass>;Database=<database>`
+  * 连接串：`gaussdb://<username>:<password>@<host>:<port>/<database>`/`Host=<host>:<port>;Username=<username>;Password=<password>;Database=<database>`
   * 驱动名称：GaussDB
 
 ## gaussdb-node
