@@ -53,7 +53,7 @@
   * 包名：HuaweiCloud.Drivers.GaussDB
 * 应用开发
   * namespace：HuaweiCloud.GaussDB
-  * 连接串：`dbc:gaussdb://<host>:<port>/<database>`
+  * 连接串：`gaussdb://<username>:<password>@<host>:<port>/<database>`/`Host=<host>;Username=<user>;Password=<pass>;Database=<database>`
   * 驱动名称：GaussDB
 
 ## gaussdb-node
