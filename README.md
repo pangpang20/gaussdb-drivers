@@ -1,6 +1,6 @@
-本项目的目的是帮助繁荣[GaussDB](https://www.huaweicloud.com/product/gaussdb.html) 和 [OpenGauss](https://opengauss.org/zh/) 开源生态。
+本项目的目的是帮助繁荣 [GaussDB](https://www.huaweicloud.com/product/gaussdb.html) 和 [OpenGauss](https://opengauss.org/zh/) 开源生态。
 
-项目包括常见语言的驱动，这些驱动目前都通过PostgreSQL开源驱动进行构建。
+项目包括常见语言的驱动，这些驱动目前都通过PostgreSQL开源驱动进行构建。GaussDB开源生态信息参考 [gaussdb-ecosystem](https://github.com/HuaweiCloudDeveloper/gaussdb-ecosystem) 。
 
 > ***如果发现项目能帮助到您，别忘了点击右上角`star`表示鼓励***
 
@@ -10,10 +10,10 @@
 | ------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------- |
 | JAVA   | [gaussdb-r2dbc](https://github.com/HuaweiCloudDeveloper/gaussdb-r2dbc)               | [r2dbc-postgresql](https://github.com/pgjdbc/r2dbc-postgresql)        |        已发布             |
 | GO     | [gaussdb-go](https://github.com/HuaweiCloudDeveloper/gaussdb-go)                     | [pgx](https://github.com/jackc/pgx)                                   |       已发布           |
+| .NET   | [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)             | [npgsql](https://github.com/npgsql/npgsql)                            |         已发布             |
 | Python | [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                         |     开发中             |
 | Python | [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)                      |    开发中               |
 | NodeJS | [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)              |       开发中               |
-| .NET   | [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)             | [npgsql](https://github.com/npgsql/npgsql)                            |         开发中             |
 | PHP    | [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)                   | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql) |  开发中 |
 | Rust   | [gaussdb-rust](https://github.com/HuaweiCloudDeveloper/gaussdb-rust)                 | [rust-postgres](https://github.com/sfackler/rust-postgres/)           |       开发中               |
 
@@ -50,7 +50,7 @@
 * 项目信息
   * 仓库名称：gaussdb-dotnet
 * NuGet发布
-  * 包名：HuaweiCloud.Drivers.GaussDB
+  * 包名：HuaweiCloud.Driver.GaussDB
 * 应用开发
   * namespace：HuaweiCloud.GaussDB
   * 连接串：`gaussdb://<username>:<password>@<host>:<port>/<database>`/`Host=<host>:<port>;Username=<username>;Password=<password>;Database=<database>`
@@ -63,7 +63,7 @@
 * 包名: gaussdb
 
 
-# 项目发布信息
+# 发布信息
 
 ## JDBC驱动
 
@@ -114,6 +114,14 @@ dependencies {
     implementation 'com.huaweicloud.gaussdb:gaussdb-r2dbc:1.0.0.RC1'
 }  
 ```
+
+## GO驱动
+
+版本发布：https://pkg.go.dev/github.com/HuaweiCloudDeveloper/gaussdb-go
+
+## .NET驱动
+
+版本发布：https://www.nuget.org/packages/HuaweiCloud.Driver.GaussDB/
 
 # 开源开发规范
 
