@@ -78,6 +78,26 @@ GaussDB使用的逻辑复制端口与普通SQL端口不同，通常为普通端�
 
 ### GaussDB不支持JSON和JSONB类型的隐式转换
 
+PostgreSQL支持隐式转换
+```sql
+SELECT '{"a":1}'::jsonb || '{"b":2}';  -- 成功
+```
+
+GaussDB需显式转换
+```sql
+SELECT CAST('{"a":1}' AS JSONB) || '{"b":2}'; 
+```
+
+PostgreSQL JSON路径查询
+```sql
+SELECT json_query(data, '$.items[*].id' WITH WRAPPER);
+```
+
+GaussDB替代方案
+```sql
+SELECT json_build_array(data::json #> '{items,*,id}');
+```
+
 * 补充说明
 
 参考链接：
@@ -93,8 +113,10 @@ insert into PLAN_TABLE (name,id) values (?,?)
 insert into PLAN_TABLE (name,id) values (?,?)
 ```
 
-### array_position(e.theArray, 'xyz') = 0函数表现不一致
-* GaussDB写法
+### 数组函数行为差异
+
+* GaussDB返回数组形式
+
 ```
 select
         ewa1_0.id,
@@ -108,7 +130,8 @@ select
             array_positions(ewa1_0.the_array, 'xyz')
         )[1]=0
 ```
-* PosgreSQL写法
+
+* PostgreSQL (返回第一个匹配位置)
 ```
 select
         ewa1_0.id,
@@ -125,6 +148,7 @@ select
 ```
 
 ### array_trim(e.theArray, 1)函数表现不一致
+
 * GaussDB写法
 ```
 select
