@@ -347,6 +347,15 @@ where
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0202180070831076010-1-1.html
 
+### GaussDB的SEQUENCE不支持修改类型
+GaussDB会报: `syntax error at or near "AS"`
+* PosgreSQL写法  
+```sql
+ALTER SEQUENCE IF EXISTS events_uid_seq AS integer
+```
+
+参考连接:  
+https://doc.hcs.huawei.com/db/en-us/gaussdb/24.1.30/devg-dist/gaussdb-12-0504.html
 
 ## GaussDB不存在的功能
 
