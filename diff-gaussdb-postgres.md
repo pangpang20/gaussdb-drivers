@@ -357,6 +357,13 @@ ALTER SEQUENCE IF EXISTS events_uid_seq AS integer
 参考连接:  
 https://doc.hcs.huawei.com/db/en-us/gaussdb/24.1.30/devg-dist/gaussdb-12-0504.html
 
+### GaussDB创建表必须至少有一列
+GaussDB会报: `ERROR:  There must be at least one column.`
+* PosgreSQL写法
+```sql
+CREATE TABLE "objects" ()
+```
+
 ## GaussDB不存在的功能
 
 ### 不支持refcursor关键字
