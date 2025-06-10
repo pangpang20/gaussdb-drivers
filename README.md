@@ -6,16 +6,16 @@
 
 # 项目信息
 
-| 语言   | 驱动名称                                                                          | 对应PostgreSQL驱动                                                 | 备注                |
-| ------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------- |
-| JAVA   | [gaussdb-r2dbc](https://github.com/HuaweiCloudDeveloper/gaussdb-r2dbc)               | [r2dbc-postgresql](https://github.com/pgjdbc/r2dbc-postgresql)        |        已发布             |
-| GO     | [gaussdb-go](https://github.com/HuaweiCloudDeveloper/gaussdb-go)                     | [pgx](https://github.com/jackc/pgx)                                   |       已发布           |
-| .NET   | [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)             | [npgsql](https://github.com/npgsql/npgsql)                            |         已发布             |
-| Python | [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                         |     开发中             |
-| Python | [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)                      |    开发中               |
-| NodeJS | [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)              |       开发中               |
-| PHP    | [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)                   | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql) |  开发中 |
-| Rust   | [gaussdb-rust](https://github.com/HuaweiCloudDeveloper/gaussdb-rust)                 | [rust-postgres](https://github.com/sfackler/rust-postgres/)           |       开发中               |
+| 语言   | 驱动名称                                                                          | 对应PostgreSQL驱动 | 示例代码                                                 | 备注                |
+| ------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------- | ------------------- |
+| JAVA   | [gaussdb-r2dbc](https://github.com/HuaweiCloudDeveloper/gaussdb-r2dbc)               | [r2dbc-postgresql](https://github.com/pgjdbc/r2dbc-postgresql)        | [示例代码](https://github.com/HuaweiCloudDeveloper/gaussdb-r2dbc-examples)  |     已发布             |
+| GO     | [gaussdb-go](https://github.com/HuaweiCloudDeveloper/gaussdb-go)                     | [pgx](https://github.com/jackc/pgx)                                   |  |     已发布           |
+| .NET   | [gaussdb-dotnet](https://github.com/HuaweiCloudDeveloper/gaussdb-dotnet)             | [npgsql](https://github.com/npgsql/npgsql)                            |    |     已发布             |
+| Python | [gaussdb-python](https://github.com/HuaweiCloudDeveloper/gaussdb-python)             | [psycopg](https://github.com/psycopg/psycopg)                         |   |  开发中             |
+| Python | [gaussdb-python-async](https://github.com/HuaweiCloudDeveloper/gaussdb-python-async) | [asyncpg](https://github.com/MagicStack/asyncpg)                      |   | 开发中               |
+| NodeJS | [gaussdb-node](https://github.com/HuaweiCloudDeveloper/gaussdb-node)                 | [node-postgres](https://github.com/brianc/node-postgres)              |     |  开发中               |
+| PHP    | [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)                   | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql) | [示例代码](https://github.com/HuaweiCloudDeveloper/gaussdb-rust/tree/master/examples) | 开发中 |
+| Rust   | [gaussdb-rust](https://github.com/HuaweiCloudDeveloper/gaussdb-rust)                 | [rust-postgres](https://github.com/sfackler/rust-postgres/)           |  [示例代码](https://github.com/HuaweiCloudDeveloper/gaussdb-rust/tree/master/examples)     | 开发中               |
 
 # 项目标准规范
 
@@ -122,6 +122,10 @@ dependencies {
 ## .NET驱动
 
 版本发布：https://www.nuget.org/packages/HuaweiCloud.Driver.GaussDB/
+
+## Rust驱动
+
+版本发布：https://crates.io/crates/gaussdb
 
 # 开源开发规范
 
