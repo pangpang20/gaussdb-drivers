@@ -631,25 +631,6 @@ update
         to_jsonb(cast(null as varchar)))
 ```
 
-### 对sinh，log，log10等函数不支持
-* GaussDB写法 
-```
-select log10(eob1_0.the_int),log(?,eob1_0.the_int) from EntityOfBasics eob1_0 where eob1_0.id=?, Error Msg = Unsupported function.
-```
-* PosgreSQL写法
-```
-select log10(eob1_0.the_int),log(?,eob1_0.the_int) from EntityOfBasics eob1_0 where eob1_0.id=?, Error Msg = Unsupported function.
-```
-
-### 不支持insert on conflinct语法
-* GaussDB写法 
-```
-insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothing
-```
-* PosgreSQL写法
-```
-insert into BasicEntity as be1_0(id,data) values (1,'John') on conflict do nothing
-```
 ### 不支持在临时表上创建trigger
 会报类似的错误: `ERROR:  Only support CREATE TRIGGER on regular row table.`
 
@@ -842,16 +823,12 @@ postgres=# select '1.23'::float8;
 应用程序在这个场景会捕获到数据库异常，最佳的状态是能够自动恢复。客户端驱动如果要做到自动恢复，需要数据库针对这个异常返回不一样的错误码。
 
 ### 除法会返回小数
-执行`select 4/3;`会返回: `1.33333333333333326`
+执行`select 4/3;`
 
-PosgreSQL:
-```sql
-postgres=# select 4/3;
- ?column?
-----------
-        1
-(1 row)
-```
+GaussDB会返回: `1.33333333333333326`
+
+PosgreSQL会返回:1
+
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0233180004755556002-1-1.html
 
