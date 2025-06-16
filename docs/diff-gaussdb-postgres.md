@@ -364,6 +364,17 @@ GaussDB会报: `ERROR:  There must be at least one column.`
 CREATE TABLE "objects" ()
 ```
 
+### 除法返回结果差异
+执行`select 4/3;`
+
+GaussDB会返回: `1.33333333333333326`
+
+PosgreSQL会返回:1
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0233180004755556002-1-1.html
+
+
 ## GaussDB不存在的功能
 
 ### 不支持refcursor关键字
@@ -402,7 +413,7 @@ CREATE TABLE "objects" ()
 * https://bbs.huaweicloud.com/forum/thread-0213178941810463121-1-1.html
 * https://support.huaweicloud.com/intl/zh-cn/centralized-devg-v2-gaussdb/gaussdb_42_0501.html
 
-### 不支持 临时表Serial
+### 不支持临时表Serial
 
 * 补充说明
 
@@ -474,7 +485,6 @@ postgres=# show unix_socket_directories;
 * https://doc.hcs.huawei.com/db/zh-cn/gaussdb/24.1.30/devg-dist/gaussdb-12-1690.html
 
 
-
 ### 不支持**DISCARD**关键字
 
 - Discard非保留关键字，且在GaussDB中执行后出现异常 "DISCARD statement is not yet supported."
@@ -484,7 +494,6 @@ postgres=# show unix_socket_directories;
 https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
 
 
-
 ### 不支持**UNLISTEN**关键字
 
 - UNLISTEN非保留关键字，且在GaussDB中执行后出现异常 "UNLISTENstatement is not yet supported."
@@ -492,21 +501,6 @@ https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
 参考连接：
 
 https://support.huaweicloud.com/centralized-devg-v3-gaussdb/gaussdb-42-0327.html
-
-
-
-### 用户名不支持某些特殊字符
-
-会报类似的错误: `ERROR:  Invalid name:  tricky, ' } " \\ test user .`
-
-PosgreSQL:
-```sql
-postgres=# create user " tricky, ' } "" \\ test user " SUPERUSER password 'secret';
-CREATE ROLE
-postgres=#
-```
-参考链接：
-* https://bbs.huaweicloud.com/forum/thread-0228180004564653006-1-1.html
 
 ### unnest语法不支持
 * GaussDB写法
@@ -783,27 +777,6 @@ postgres=# select ssl from pg_stat_ssl;
 参考链接
 *  https://bbs.huaweicloud.com/forum/thread-0202180086482842011-1-1.html
 
-### 字符串转为float4/float8的时候, 跟原值不一样
-PostgreSQL是与原值一致的, GaussDB会在不同的目标类型返回不同的值
-
-PostgreSQL:
-```sql
--- GaussDB返回1.23000002
-postgres=# select '1.23'::float4;
- float4
---------
-   1.23
-(1 row)
-
--- GaussDB返回1.22999999999999998
-postgres=# select '1.23'::float8;
- float8
---------
-   1.23
-(1 row)
-```
-参考链接
-*  https://bbs.huaweicloud.com/forum/thread-0204180071486749008-1-1.html?ticket=ST-8325461-ATYwrfoNhvN7d0UckaH6YC29-sso
 
 ### 不支持 macaddr8类型
 
@@ -838,15 +811,29 @@ postgres=# select '1.23'::float8;
 
 应用程序在这个场景会捕获到数据库异常，最佳的状态是能够自动恢复。客户端驱动如果要做到自动恢复，需要数据库针对这个异常返回不一样的错误码。
 
-### 除法会返回小数
-执行`select 4/3;`
+### 字符串转为float4/float8的时候, 跟原值不一样
+PostgreSQL是与原值一致的, GaussDB会在不同的目标类型返回不同的值
 
-GaussDB会返回: `1.33333333333333326`
+PostgreSQL:
 
-PosgreSQL会返回:1
+```sql
+-- GaussDB返回1.23000002
+postgres=# select '1.23'::float4;
+ float4
+--------
+   1.23
+(1 row)
 
-参考链接：
-* https://bbs.huaweicloud.com/forum/thread-0233180004755556002-1-1.html
+-- GaussDB返回1.22999999999999998
+postgres=# select '1.23'::float8;
+ float8
+--------
+   1.23
+(1 row)
+```
+
+参考链接
+*  https://bbs.huaweicloud.com/forum/thread-0204180071486749008-1-1.html
 
 ## JDBC(gaussjdbc.jar)已知缺陷
 
@@ -865,6 +852,7 @@ PosgreSQL会返回:1
     * https://bbs.huaweicloud.com/forum/thread-0234179025026914116-1-1.html
 
 ### 获取byte二位数组失败
+
 ```
 final byte[][] byteArray = session.find( EntityWithDoubleByteArray.class, id ).getByteArray();
 
