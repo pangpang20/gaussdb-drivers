@@ -835,6 +835,22 @@ postgres=# select '1.23'::float8;
 参考链接
 *  https://bbs.huaweicloud.com/forum/thread-0204180071486749008-1-1.html
 
+### 通过libpq库以BINARY格式执行COPY操作时，偶尔会出现数据读取错误
+
+在psycopg3中执行以下COPY语句后进行数据读取，底层会调用libpq库的PQgetCopyData函数，可能会报错：`receiving copy data failed: no COPY in progress`
+
+```sql
+create table "fake_table" (id serial primary key, "fld_0" "int2", "fld_1" "int4", "fld_2" "bytea", "fld_3" "uuid", "fld_4" "bytea", "fld_5" "int4", "fld_6" "bytea", "fld_7" "jsonb", "fld_8" "float4", "fld_9" "int4", "fld_10" "jsonb", "fld_11" "numeric", "fld_12" "daterange", "fld_13" "uuid", "fld_14" "int8", "fld_15" "bytea", "fld_16" "int4", "fld_17" "int2", "fld_18" "int8range", "fld_19" "int4");
+
+copy (select "fld_0", "fld_1", "fld_2", "fld_3", "fld_4", "fld_5", "fld_6", "fld_7", "fld_8", "fld_9", "fld_10", "fld_11", "fld_12", "fld_13", "fld_14", "fld_15", "fld_16", "fld_17", "fld_18", "fld_19" from "fake_table" order by id) to stdout (format BINARY);
+```
+
+* 补充说明
+
+参考连接：
+
+* https://bbs.huaweicloud.com/forum/thread-0255184575549538002-1-1.html
+
 ## JDBC(gaussjdbc.jar)已知缺陷
 
 ### FETCH FIRST n ROWS提示语法错误
