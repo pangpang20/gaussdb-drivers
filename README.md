@@ -18,7 +18,7 @@
 | PHP    | [gaussdb-php](https://github.com/HuaweiCloudDeveloper/gaussdb-php)                   | [pdo_pgsql](https://github.com/php/php-src/tree/master/ext/pdo_pgsql) |  | 开发中 |
 | Rust   | [gaussdb-rust](https://github.com/HuaweiCloudDeveloper/gaussdb-rust)                 | [rust-postgres](https://github.com/sfackler/rust-postgres/)           |  [示例代码](https://github.com/HuaweiCloudDeveloper/gaussdb-rust/tree/master/examples)     | [已发布](https://crates.io/crates/gaussdb)               |
 | C   | libpq   | [libpq](https://github.com/postgres/postgres/blob/master/src/include/libpq/libpq.h)           |  [示例代码](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1845.html)     | [已发布](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1845.html)               |
-
+| C   | ODBC   | [psqlodbc](https://github.com/postgresql-interfaces/psqlodbc)           |  [示例代码](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1845.html)     | [已发布](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-0095.html)               |
 
 # 其他参考信息
 
