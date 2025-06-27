@@ -62,13 +62,6 @@ GaussDB使用的逻辑复制端口与普通SQL端口不同，通常为普通端�
 参考链接：
   * https://bbs.huaweicloud.com/forum/thread-0228180067001483008-1-1.html
 
-### gaussdbjdbc.jar的executeBatch返回值不符合JDBC规范
-
-* 补充说明
-
-参考链接：
-    * https://bbs.huaweicloud.com/forum/thread-02104174303512776081-1-1.html
-
 ### SELECT pg_type.* FROM pg_catalog.pg_type 缺少oid字段
 
 * 补充说明
@@ -866,6 +859,13 @@ copy (select "fld_0", "fld_1", "fld_2", "fld_3", "fld_4", "fld_5", "fld_6", "fld
 
 参考链接：
     * https://bbs.huaweicloud.com/forum/thread-0234179025026914116-1-1.html
+
+### gaussdbjdbc.jar的executeBatch返回值不符合JDBC规范
+
+* 补充说明
+
+参考链接：
+    * https://bbs.huaweicloud.com/forum/thread-02104174303512776081-1-1.html
 
 ### 获取byte二位数组失败
 
