@@ -617,7 +617,7 @@ select (current_date-cast(? as date))*86400*1e9
 ```
 * 补充说明 
 ```
-产品特性，不容兼容模式有不同的行为。默认的兼容模式是内存溢出
+产品特性，不同兼容模式有不同的行为。默认的兼容模式是内存溢出
 ```
 
 ### 对结构性字段如json的某字段的更新和查询不支持
@@ -873,4 +873,26 @@ copy (select "fld_0", "fld_1", "fld_2", "fld_3", "fld_4", "fld_5", "fld_6", "fld
 final byte[][] byteArray = session.find( EntityWithDoubleByteArray.class, id ).getByteArray();
 
 java.sql.SQLFeatureNotSupportedException: Method com.huawei.gaussdb.jdbc.jdbc.PgArray.getArrayImpl(long,int,Map) is not yet implemented.
+```
+
+### bigint类型对''的处理不同
+
+* GaussDB
+数据库使用默认兼容模式A，即Oracle兼容模式，bigint类型对空字符串的处理不同。
+
+```sql
+test02=> create table testmany (a bigint, b bigint);
+CREATE TABLE
+test02=>  insert into testmany values (1, '');
+INSERT 0 1
+```
+
+* PosgreSQL
+
+```sql
+postgres=# create table testmany (a bigint, b bigint);
+CREATE TABLE
+postgres=# insert into testmany values (1, '');
+ERROR:  invalid input syntax for type bigint: ""
+LINE 1: insert into testmany values (1, '');
 ```
