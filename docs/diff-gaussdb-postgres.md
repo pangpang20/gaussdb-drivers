@@ -896,3 +896,38 @@ postgres=# insert into testmany values (1, '');
 ERROR:  invalid input syntax for type bigint: ""
 LINE 1: insert into testmany values (1, '');
 ```
+
+
+### 嵌套事务隔离级别不同
+* 测试脚本
+```sql
+BEGIN ISOLATION LEVEL REPEATABLE READ;
+SELECT 'Outer: ' || current_setting('transaction_isolation') AS isolation_level_outer;
+
+SAVEPOINT sp1;
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SELECT 'Inner: ' || current_setting('transaction_isolation') AS isolation_level_inner;
+
+ROLLBACK;
+```  
+
+* GaussDB
+在 GaussDB 上，执行脚本不会报错，而且隔离级别会被更改：
+```text
+ isolation_level_outer 
+-----------------------
+ repeatable read
+(1 row)
+
+ isolation_level_inner 
+-----------------------
+ serializable
+(1 row)
+```
+
+* PosgreSQL
+在 PostgreSQL 上，执行 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; 时会报错：
+```text
+ERROR:  SET TRANSACTION ISOLATION LEVEL must be called before any query
+```
