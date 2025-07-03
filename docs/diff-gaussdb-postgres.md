@@ -931,3 +931,7 @@ ROLLBACK;
 ```text
 ERROR:  SET TRANSACTION ISOLATION LEVEL must be called before any query
 ```
+
+
+### PostgreSQL与GaussDB中SET SESSION AUTHORIZATION 不同
+参考链接：https://bbs.huaweicloud.com/forum/thread-0236186944607404002-1-1.html
