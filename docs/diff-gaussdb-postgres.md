@@ -915,15 +915,26 @@ ROLLBACK;
 * GaussDB
 在 GaussDB 上，执行脚本不会报错，而且隔离级别会被更改：
 ```text
- isolation_level_outer 
------------------------
- repeatable read
+openGauss=# BEGIN ISOLATION LEVEL REPEATABLE READ;
+BEGIN
+openGauss=# SELECT 'Outer: ' || current_setting('transaction_isolation') AS isolation_level_outer;
+ isolation_level_outer  
+------------------------
+ Outer: repeatable read
 (1 row)
 
- isolation_level_inner 
------------------------
- serializable
+openGauss=# SAVEPOINT sp1;
+SAVEPOINT
+openGauss=# SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET
+openGauss=# SELECT 'Inner: ' || current_setting('transaction_isolation') AS isolation_level_inner;
+ isolation_level_inner  
+------------------------
+ Inner: repeatable read
 (1 row)
+
+openGauss=# ROLLBACK;
+ROLLBACK
 ```
 
 * PosgreSQL
