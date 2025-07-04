@@ -896,3 +896,53 @@ postgres=# insert into testmany values (1, '');
 ERROR:  invalid input syntax for type bigint: ""
 LINE 1: insert into testmany values (1, '');
 ```
+
+
+### 嵌套事务隔离级别不同
+* 测试脚本
+```sql
+BEGIN ISOLATION LEVEL REPEATABLE READ;
+SELECT 'Outer: ' || current_setting('transaction_isolation') AS isolation_level_outer;
+
+SAVEPOINT sp1;
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SELECT 'Inner: ' || current_setting('transaction_isolation') AS isolation_level_inner;
+
+ROLLBACK;
+```  
+
+* GaussDB
+在 GaussDB 上，执行脚本不会报错，而且隔离级别会被更改：
+```text
+openGauss=# BEGIN ISOLATION LEVEL REPEATABLE READ;
+BEGIN
+openGauss=# SELECT 'Outer: ' || current_setting('transaction_isolation') AS isolation_level_outer;
+ isolation_level_outer  
+------------------------
+ Outer: repeatable read
+(1 row)
+
+openGauss=# SAVEPOINT sp1;
+SAVEPOINT
+openGauss=# SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET
+openGauss=# SELECT 'Inner: ' || current_setting('transaction_isolation') AS isolation_level_inner;
+ isolation_level_inner  
+------------------------
+ Inner: repeatable read
+(1 row)
+
+openGauss=# ROLLBACK;
+ROLLBACK
+```
+
+* PosgreSQL
+在 PostgreSQL 上，执行 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; 时会报错：
+```text
+ERROR:  SET TRANSACTION ISOLATION LEVEL must be called before any query
+```
+
+
+### PostgreSQL与GaussDB中SET SESSION AUTHORIZATION 不同
+参考链接：https://bbs.huaweicloud.com/forum/thread-0236186944607404002-1-1.html
