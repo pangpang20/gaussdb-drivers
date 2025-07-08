@@ -1,3 +1,9 @@
+<p align="center">
+  <h1 align="center">GaussDB Drivers</h1>
+  <p align="center">
+    <a href="README_ZH.md"><strong>简体中文</strong></a> | <strong>English</strong>
+  </p>
+
 The purpose of this project is to foster the growth of the [GaussDB](https://www.huaweicloud.com/product/gaussdb.html) and [OpenGauss](https://opengauss.org/zh/) open-source ecosystem.
 
 The project includes drivers for common programming languages, which are currently built on the PostgreSQL open-source drivers. For details on the GaussDB open-source ecosystem, refer to [gaussdb-ecosystem](https://github.com/HuaweiCloudDeveloper/gaussdb-ecosystem).
