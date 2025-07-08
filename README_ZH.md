@@ -1,3 +1,8 @@
+<p align="center">
+  <h1 align="center">GaussDB驱动</h1>
+  <p align="center">
+    <a href="README.md"><strong>English</strong></a> | <strong>简体中文</strong>
+  </p>
 本项目的目的是帮助繁荣 [GaussDB](https://www.huaweicloud.com/product/gaussdb.html) 和 [OpenGauss](https://opengauss.org/zh/) 开源生态。
 
 项目包括常见语言的驱动，这些驱动目前都通过PostgreSQL开源驱动进行构建。GaussDB开源生态信息参考 [gaussdb-ecosystem](https://github.com/HuaweiCloudDeveloper/gaussdb-ecosystem) 。
