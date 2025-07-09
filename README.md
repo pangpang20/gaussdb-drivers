@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">GaussDB驱动</h1>
   <p align="center">
-    <a href="README.md"><strong>English</strong></a> | <strong>简体中文</strong>
+    <a href="README_EN.md"><strong>English</strong></a> | <strong>简体中文</strong>
   </p>
 本项目的目的是帮助繁荣 [GaussDB](https://www.huaweicloud.com/product/gaussdb.html) 和 [OpenGauss](https://opengauss.org/zh/) 开源生态。
 
