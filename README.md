@@ -1,5 +1,4 @@
 <p align="center">
-  <h1 align="center">GaussDB驱动</h1>
   <p align="center">
     <a href="README_EN.md"><strong>English</strong></a> | <strong>简体中文</strong>
   </p>
