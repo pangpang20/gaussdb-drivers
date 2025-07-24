@@ -28,3 +28,5 @@
 # 其他参考信息
 
 * [GaussDB和PostgresSQL功能和语法差异](docs/diff-gaussdb-postgres.md)
+* [GaussDB和OpenGauss功能和语法差异](docs/diff-gaussdb-opengauss.md)
+* [GaussDB、OpenGauss、JDBC驱动已知缺陷](docs/known-bugs.md)

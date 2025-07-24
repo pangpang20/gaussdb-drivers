@@ -25,6 +25,3 @@ The project includes drivers for common programming languages, which are current
 | C   | libpq   | [libpq](https://github.com/postgres/postgres/blob/master/src/include/libpq/libpq.h)           |  [Code Sample](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1845.html)     | [Released](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1845.html)               |
 | C   | ODBC   | [psqlodbc](https://github.com/postgresql-interfaces/psqlodbc)           |  [Code Sample](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1832.html)     | [Released](https://support.huaweicloud.com/distributed-devg-v8-gaussdb/gaussdb-12-1830.html)               |
 
-# Other Reference Information
-
-* [GaussDB and PostgreSQL Functional and Syntactic Differences](docs/diff-gaussdb-postgres.md)
