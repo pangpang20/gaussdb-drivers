@@ -880,5 +880,12 @@ postgres=# select ssl from pg_stat_ssl;
 * https://bbs.huaweicloud.com/forum/thread-0237192880011140049-1-1.html
 * https://bbs.huaweicloud.com/forum/thread-0243192880666906043-1-1.html
 
+### pg_stat_user_tables 表中 n_mod_since_analyze 字段不存在
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0243192881948212044-1-1.html
+
 
 ## PostgreSQL不存在的功能
