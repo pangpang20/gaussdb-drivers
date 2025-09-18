@@ -887,5 +887,12 @@ postgres=# select ssl from pg_stat_ssl;
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0243192881948212044-1-1.html
 
+### 视图pg_stat_archiver不存在
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0243192956481730045-1-1.html
+
 
 ## PostgreSQL不存在的功能
