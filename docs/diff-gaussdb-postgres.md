@@ -894,12 +894,13 @@ postgres=# select ssl from pg_stat_ssl;
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0243192956481730045-1-1.html
 
-### pg_replication_slots 表中 confirmed_flush_lsn 字段不存在
+### pg_replication_slots 表中 confirmed_flush_lsn、safe_wal_size 字段不存在
 
 * 补充说明
 
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0251193564075283089-1-1.html
+* https://bbs.huaweicloud.com/forum/thread-0208193564482195115-1-1.html
 
 
 ## PostgreSQL不存在的功能
