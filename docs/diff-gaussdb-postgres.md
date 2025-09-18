@@ -871,12 +871,13 @@ postgres=# select ssl from pg_stat_ssl;
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0203192869289100046-1-1.html
 
-### pg_stat_activity 表中 backend_type 字段不存在
+### pg_stat_activity 表中 backend_type、wait_event_type 字段不存在
 
 * 补充说明
 
 参考链接：
 * https://bbs.huaweicloud.com/forum/thread-0208192878348211072-1-1.html
+* https://bbs.huaweicloud.com/forum/thread-0237192880011140049-1-1.html
 
 
 ## PostgreSQL不存在的功能
