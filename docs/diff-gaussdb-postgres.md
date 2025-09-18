@@ -864,5 +864,12 @@ postgres=# select ssl from pg_stat_ssl;
 
   在.NET Npgsql.Schema GenerateColumnsQuery中会查询pg_attribute的attidentity，导致大量相关测试用例失败。
 
+### pg_stat_database 表中 active_time 字段不存在
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0203192869289100046-1-1.html
+
 
 ## PostgreSQL不存在的功能
