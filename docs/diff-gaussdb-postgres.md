@@ -903,5 +903,12 @@ postgres=# select ssl from pg_stat_ssl;
 * https://bbs.huaweicloud.com/forum/thread-0208193564482195115-1-1.html
 * https://bbs.huaweicloud.com/forum/thread-02127193564980516097-1-1.html
 
+### 函数"pg_last_wal_receive_lsn()"不存在
+
+* 补充说明
+
+参考链接：
+* https://bbs.huaweicloud.com/forum/thread-0203193566102248090-1-1.html
+
 
 ## PostgreSQL不存在的功能
